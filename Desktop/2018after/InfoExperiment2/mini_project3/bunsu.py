@@ -1,24 +1,26 @@
 def add(number1, number2):
-    puls_minus1 = number1[0]
-    puls_minus2 = number2[0]
-    if(puls_minus1 < 0):
-        puls_minus1 = 1
-    if(puls_minus2 < 0):
-        puls_minus2 = 1
-    child1 = puls_minus1 * number1[1]  * number1[3] + number1[2]
+    if(number1[0] < 0):
+        child1 = 1 * number1[1]  * number1[3] + number1[2]
+        child1 = child1 * (-1)
+    else:    
+        child1 = number1[0] * number1[1]  * number1[3] + number1[2]    
     child1 = child1 * number2[3]
-    child2 = puls_minus2 * number2[1]  * number2[3] + number2[2]
+    
+    if(number2[0] < 0):
+        child2 = 1 * number2[1]  * number2[3] + number2[2]
+        child2 = child2 * (-1)
+    else:    
+        child2 = number2[0] * number2[1]  * number2[3] + number2[2]
     child2 = child2 * (number1[3])
+
     mother = number1[3] * number2[3]
-
     children = child1 + child2
-
     count = 0
-    #加算用にも追加
-    puls_minus = 1
+    flag = 0
+    #帯分数の整数の数
     if(children < 0):
-        puls_minus = -1
-        children = children*(-1)
+        children = children * (-1)
+        flag = 1
 
     for i in range(children // mother):
         children -= mother
@@ -30,57 +32,75 @@ def add(number1, number2):
         mother = mother / saidaikouyaku 
     else:
         mother = 1
-
-    number3 = (number1[0], count, children, mother)
-    #print(number3)
+    if(flag == 0):
+        number3 = (number1[0], count, children, mother)
+    else:
+        if(children < 0):
+            children = children * (-1)
+        number3 = (number1[0], count, children, mother)
     return number3
 
 def sub(number1, number2):
-    puls_minus = number1[0]
-    child1 = number1[0] * number1[1]  * number1[3] + number1[2]
-    child1 += child1 * (number2[3]-1)
-    child2 = number2[0] * number2[1]  * number2[3] + number2[2]
-    child2 += child2 * (number1[3]-1)
+    if(number1[0] < 0):
+        child1 = 1 * number1[1]  * number1[3] + number1[2]
+        child1 = child1 * (-1)
+    else:    
+        child1 = number1[0] * number1[1]  * number1[3] + number1[2]    
+    child1 = child1 * number2[3]
+    
+    if(number2[0] < 0):
+        child2 = 1 * number2[1]  * number2[3] + number2[2]
+        child2 = child2 * (-1)
+    else:    
+        child2 = number2[0] * number2[1]  * number2[3] + number2[2]
+    child2 = child2 * (number1[3])
+
     mother = number1[3] * number2[3]
     children = child1 - child2
     count = 0
-    #減算用に追加した処理
+    flag = 0
+    #帯分数の整数の数
     if(children < 0):
-        puls_minus = -1
-        children = children*(-1)
+        children = children * (-1)
+        flag = 1
 
     for i in range(children // mother):
         children -= mother
         count += 1
     saidaikouyaku = gcd(children, mother)
+
     if(children != 0):
         children = children / saidaikouyaku
         mother = mother / saidaikouyaku 
     else:
         mother = 1
-    number3 = (puls_minus, count, children, mother)
-    # print("減算")
-    # print(number3)
+    if(flag == 0):
+        number3 = (number1[0], count, children, mother)
+    else:
+        if(children < 0):
+            children = children * (-1)
+        number3 = (number1[0], count, children, mother)
     return number3
  
-
-
 def mul(number1, number2):
-    puls_minus = number1[0]
-    child1 = number1[0] * number1[1]  * number1[3] + number1[2]
-    mul1 = child1
-    #print(child1)
-    child1 += child1 * (number2[3]-1)
-    #print(child1)
-    child2 = number2[0] * number2[1]  * number2[3] + number2[2]
-    mul2 = child2
-    #print(child2)
-    child2 += child2 * (number1[3]-1)
-    #print(child2)
-    mother = number1[3] * number2[3]
-    #print(mother)
-    children = mul1 * mul2
-    #print(children)
+    puls_minus = number1[0] * number2[0] 
+    if(number1[0] < 0):
+        child1 = 1 * number1[1]  * number1[3] + number1[2]
+        child1 = child1 * (-1)
+    else:    
+        child1 = number1[0] * number1[1]  * number1[3] + number1[2]    
+    
+    if(number2[0] < 0):
+        child2 = 1 * number2[1]  * number2[3] + number2[2]
+        child2 = child2 * (-1)
+    else:    
+        child2 = number2[0] * number2[1]  * number2[3] + number2[2]
+
+    children = child1 * child2
+    children = abs(children)
+    mother =  number1[3] * number2[3]
+    mother = abs(mother)
+
     count = 0
     for i in range(children // mother):
         children -= mother
@@ -92,20 +112,27 @@ def mul(number1, number2):
     else:
         mother = 1
     number3 = (puls_minus, count, children, mother)
-    # print("乗算")
-    # print(number3)
+
     return number3
 
 def div(number1, number2):
-    puls_minus = number1[0]
-    child1 = number1[0] * number1[1]  * number1[3] + number1[2]
-    #print(child1)
+    puls_minus = number1[0] * number2[0] 
+    if(number1[0] < 0):
+        child1 = 1 * number1[1]  * number1[3] + number1[2]
+        child1 = child1 * (-1)
+    else:    
+        child1 = number1[0] * number1[1]  * number1[3] + number1[2]    
+    
+    if(number2[0] < 0):
+        child2 = 1 * number2[1]  * number2[3] + number2[2]
+        child2 = child2 * (-1)
+    else:    
+        child2 = number2[0] * number2[1]  * number2[3] + number2[2]
+
     children = child1 * (number2[3])
-    #print(children)
-    child2 = number2[0] * number2[1]  * number2[3] + number2[2]
-    #print(child2)
+    children = abs(children)
     mother = child2 * (number1[3])
-    #print(mother)
+    mother = abs(mother)
     count = 0
     for i in range(children // mother):
         children -= mother
@@ -117,11 +144,9 @@ def div(number1, number2):
     else:
         mother = 1
     number3 = (puls_minus, count, children, mother)
-    # print("除算")
-    # print(number3)
+
     return number3
     
-
 
 def gcd(seisu1, seisu2):
     if(seisu1 == 0):
@@ -151,7 +176,7 @@ if __name__ == '__main__':
     number1 = (-1, 1, 1, 2)
     number2 = (-1, 2, 2, 3)
     add(number1, number2)
-    # gcd(52,8)
-    # sub(number1, number2)
-    # mul(number1, number2)
-    # div(number1, number2)
+    gcd(52,8)
+    sub(number1, number2)
+    mul(number1, number2)
+    div(number1, number2)
