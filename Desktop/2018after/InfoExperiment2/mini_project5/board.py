@@ -84,16 +84,14 @@ class Board:
                 length.append(self.data[i][j])
             
             #リストから0だけを消す
-            for k in length:
-                if(k == 0):
-                    length.remove(0)
+            while 0 in length:
+                length.remove(0)
+    
             # もし1~9の中で重複があれば
-            if(len(set(length)) == len(length)):
+            if(len(set(length)) != len(length)):
                 return False
             else:
                 length.clear()
-
-        print("length成功")
 
         # side
         for i in range(elements):
@@ -101,18 +99,20 @@ class Board:
             for j in range(elements):
                 side.append(self.data[j][i])
             
+            # #リストから0だけを消す
+            # for k in side:
+            #     if(k == 0):
+            #         side.remove(0)
+            
             #リストから0だけを消す
-            for k in side:
-                if(k == 0):
-                    side.remove(0)
+            while 0 in side:
+                side.remove(0)
+
             # もし1~9の中で重複があれば
-            if(len(set(side)) == len(side)):
+            if(len(set(side)) != len(side)):
                 return False
             else:
                 side.clear()
-        print("side成功")
-
-
 
         #block
         for i in range(0, 3):
@@ -123,11 +123,10 @@ class Board:
             for j in range(3):
                 block.append(self.data[i][j+6]) 
             #リストから0だけを消す
-            for k in block:
-                if(k == 0):
-                    block.remove(0)
+            while 0 in block:
+                block.remove(0)
             #もし1~9の中で重複があれば
-            if(len(set(block)) == len(block)):
+            if(len(set(block)) != len(block)):
                 return False
             else:
                 block.clear()
@@ -140,15 +139,14 @@ class Board:
             for j in range(3):
                 block.append(self.data[i][j+6]) 
             #リストから0だけを消す
-            for k in block:
-                if(k == 0):
-                    block.remove(0)
+            while 0 in block:
+                block.remove(0)
             #もし1~9の中で重複があれば
-            if(len(set(block)) == len(block)):
+            if(len(set(block)) != len(block)):
                 return False
             else:
                 block.clear()
-        
+   
         for i in range(6, 9):
             for j in range(3):
                 block.append(self.data[i][j])   
@@ -157,14 +155,14 @@ class Board:
             for j in range(3):
                 block.append(self.data[i][j+6]) 
             #リストから0だけを消す
-            for k in block:
-                if(k == 0):
-                    block.remove(0)
+            while 0 in block:
+                block.remove(0)
             #もし1~9の中で重複があれば
-            if(len(set(block)) == len(block)):
+            if(len(set(block)) != len(block)):
                 return False
             else:
                 block.clear()
+
         return True
 
 
@@ -286,4 +284,5 @@ if __name__ == '__main__':
     print(board.move(1,2,4))
 
     print(solution.verify())
+    print(board.verify())
 
