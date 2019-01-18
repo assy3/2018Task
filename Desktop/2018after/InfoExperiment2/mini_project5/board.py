@@ -14,76 +14,160 @@ class Board:
         else:
             return False
 
+    # def verify(self):
+    #     length = 0
+    #     side = 0
+    #     block = 0
+    #     elements = len(self.data[1])
+    #     #length
+    #     for i in range(elements):
+    #         for j in range(elements):
+    #             length += self.data[i][j]
+    #         if(length == 45):
+    #             length = 0
+    #         else:
+    #             return False
+    #     #side
+    #     for i in range(elements):
+    #         for j in range(elements):
+    #             side += self.data[j][i]
+    #         if(side == 45):
+    #             side = 0
+    #         else:
+    #             return False   
+    #     #block
+    #     for i in range(0, 3):
+    #         for j in range(3):
+    #             block += self.data[i][j]   
+    #         for j in range(3):
+    #             block += self.data[i][j+3]   
+    #         for j in range(3):
+    #             block += self.data[i][j+6] 
+    #         if(block == 45):
+    #             block = 0
+    #         else:
+    #             return False
+    #     for i in range(3, 6):
+    #         for j in range(3):
+    #             block += self.data[i][j]   
+    #         for j in range(3):
+    #             block += self.data[i][j+3]   
+    #         for j in range(3):
+    #             block += self.data[i][j+6]   
+    #         if(block == 45):
+    #             block = 0
+    #         else:
+    #             return False
+    #     for i in range(6, 9):
+    #         for j in range(3):
+    #             block += self.data[i][j]   
+    #         for j in range(3):
+    #             block += self.data[i][j+3]   
+    #         for j in range(3):
+    #             block += self.data[i][j+6]   
+    #         if(block == 45):
+    #             block = 0
+    #         else:  
+    #             return False
+    #     return True
+
     def verify(self):
-        length = 0
-        side = 0
-        block = 0
+        length = []
+        side = []
+        block = []
         elements = len(self.data[1])
         
         #length
         for i in range(elements):
+            # 縦9の数字をリストに追加
             for j in range(elements):
-                length += self.data[i][j]
-            if(length == 45):
-                length = 0
-            else:
+                length.append(self.data[i][j])
+            
+            #リストから0だけを消す
+            for k in length:
+                if(k == 0):
+                    length.remove(0)
+            # もし1~9の中で重複があれば
+            if(len(set(length)) == len(length)):
                 return False
-        #side
-        for i in range(elements):
-            for j in range(elements):
-                side += self.data[j][i]
-            if(side == 45):
-                side = 0
             else:
-                return False   
+                length.clear()
+
+        print("length成功")
+
+        # side
+        for i in range(elements):
+            # 横9の数字をリストに追加
+            for j in range(elements):
+                side.append(self.data[j][i])
+            
+            #リストから0だけを消す
+            for k in side:
+                if(k == 0):
+                    side.remove(0)
+            # もし1~9の中で重複があれば
+            if(len(set(side)) == len(side)):
+                return False
+            else:
+                side.clear()
+        print("side成功")
+
+
 
         #block
         for i in range(0, 3):
             for j in range(3):
-                block += self.data[i][j]   
-          
+                block.append(self.data[i][j])   
             for j in range(3):
-                block += self.data[i][j+3]   
-      
+                block.append(self.data[i][j+3])   
             for j in range(3):
-                block += self.data[i][j+6] 
-
-            if(block == 45):
-                block = 0
-            else:
+                block.append(self.data[i][j+6]) 
+            #リストから0だけを消す
+            for k in block:
+                if(k == 0):
+                    block.remove(0)
+            #もし1~9の中で重複があれば
+            if(len(set(block)) == len(block)):
                 return False
+            else:
+                block.clear()
 
         for i in range(3, 6):
             for j in range(3):
-                block += self.data[i][j]   
-  
+                block.append(self.data[i][j])   
             for j in range(3):
-                block += self.data[i][j+3]   
-    
+                block.append(self.data[i][j+3])   
             for j in range(3):
-                block += self.data[i][j+6]   
-
-            if(block == 45):
-                block = 0
-            else:
+                block.append(self.data[i][j+6]) 
+            #リストから0だけを消す
+            for k in block:
+                if(k == 0):
+                    block.remove(0)
+            #もし1~9の中で重複があれば
+            if(len(set(block)) == len(block)):
                 return False
+            else:
+                block.clear()
         
         for i in range(6, 9):
             for j in range(3):
-                block += self.data[i][j]   
-
+                block.append(self.data[i][j])   
             for j in range(3):
-                block += self.data[i][j+3]   
-
+                block.append(self.data[i][j+3])   
             for j in range(3):
-                block += self.data[i][j+6]   
-
-            if(block == 45):
-                block = 0
-            else:  
+                block.append(self.data[i][j+6]) 
+            #リストから0だけを消す
+            for k in block:
+                if(k == 0):
+                    block.remove(0)
+            #もし1~9の中で重複があれば
+            if(len(set(block)) == len(block)):
                 return False
+            else:
+                block.clear()
         return True
-                    
+
+
 
     def get_allowed_digits(self, x, y):
         elements = len(self.data[1])
