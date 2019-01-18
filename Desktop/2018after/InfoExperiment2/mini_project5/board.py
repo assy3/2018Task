@@ -114,54 +114,118 @@ class Board:
             else:
                 side.clear()
 
-        #block
+        #block1
         for i in range(0, 3):
             for j in range(3):
-                block.append(self.data[i][j])   
+                block.append(self.data[i][j])
+        #リストから0だけを消す
+        while 0 in block:
+            block.remove(0)
+        #もし1~9の中で重複があれば
+        if(len(set(block)) != len(block)):
+            return False
+        else:
+            block.clear() 
+
+        for i in range(0, 3):
             for j in range(3):
                 block.append(self.data[i][j+3])   
+        #リストから0だけを消す
+        while 0 in block:
+            block.remove(0)
+        #もし1~9の中で重複があれば
+        if(len(set(block)) != len(block)):
+            return False
+        else:
+            block.clear() 
+
+        for i in range(0, 3):
             for j in range(3):
                 block.append(self.data[i][j+6]) 
-            #リストから0だけを消す
-            while 0 in block:
-                block.remove(0)
-            #もし1~9の中で重複があれば
-            if(len(set(block)) != len(block)):
-                return False
-            else:
-                block.clear()
+        #リストから0だけを消す
+        while 0 in block:
+            block.remove(0)
+        #もし1~9の中で重複があれば
+        if(len(set(block)) != len(block)):
+            return False
+        else:
+            block.clear() 
+        
+
+        #block2
+        for i in range(3, 6):
+            for j in range(3):
+                block.append(self.data[i][j])
+        #リストから0だけを消す
+        while 0 in block:
+            block.remove(0)
+        #もし1~9の中で重複があれば
+        if(len(set(block)) != len(block)):
+            return False
+        else:
+            block.clear() 
 
         for i in range(3, 6):
             for j in range(3):
-                block.append(self.data[i][j])   
-            for j in range(3):
                 block.append(self.data[i][j+3])   
+        #リストから0だけを消す
+        while 0 in block:
+            block.remove(0)
+        #もし1~9の中で重複があれば
+        if(len(set(block)) != len(block)):
+            return False
+        else:
+            block.clear() 
+
+        for i in range(3, 6):
             for j in range(3):
                 block.append(self.data[i][j+6]) 
-            #リストから0だけを消す
-            while 0 in block:
-                block.remove(0)
-            #もし1~9の中で重複があれば
-            if(len(set(block)) != len(block)):
-                return False
-            else:
-                block.clear()
-   
+        #リストから0だけを消す
+        while 0 in block:
+            block.remove(0)
+        #もし1~9の中で重複があれば
+        if(len(set(block)) != len(block)):
+            return False
+        else:
+            block.clear() 
+
+
+        #block3
         for i in range(6, 9):
             for j in range(3):
-                block.append(self.data[i][j])   
+                block.append(self.data[i][j])
+        #リストから0だけを消す
+        while 0 in block:
+            block.remove(0)
+        #もし1~9の中で重複があれば
+        if(len(set(block)) != len(block)):
+            return False
+        else:
+            block.clear() 
+
+        for i in range(6, 9):
             for j in range(3):
                 block.append(self.data[i][j+3])   
+        #リストから0だけを消す
+        while 0 in block:
+            block.remove(0)
+        #もし1~9の中で重複があれば
+        if(len(set(block)) != len(block)):
+            return False
+        else:
+            block.clear() 
+
+        for i in range(6, 9):
             for j in range(3):
                 block.append(self.data[i][j+6]) 
-            #リストから0だけを消す
-            while 0 in block:
-                block.remove(0)
-            #もし1~9の中で重複があれば
-            if(len(set(block)) != len(block)):
-                return False
-            else:
-                block.clear()
+        #リストから0だけを消す
+        while 0 in block:
+            block.remove(0)
+        #もし1~9の中で重複があれば
+        if(len(set(block)) != len(block)):
+            return False
+        else:
+            block.clear() 
 
         return True
 
@@ -240,7 +304,7 @@ class Board:
 
     def move(self, x, y, d):
         # deep_copy
-        elements = len(self.data[1]) #9
+        elements = len(self.data[1]) 
         
         sub = Board([list(self.data[0]), list(self.data[1]), list(self.data[2]), list(self.data[3]), list(self.data[4]), list(self.data[5]), list(self.data[6]), list(self.data[7]), list(self.data[8])])
         sub.data[x][y] = d 
